@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Стайл · студия маникюра</title>
+  <!-- Google Fonts для яркого современного шрифта -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,800&display=swap" rel="stylesheet">
+  <!-- Font Awesome для иконок (не обязательно, но для календаря и стиля) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Сброс и базовые настройки */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0b0b0f;
+      background-image: radial-gradient(circle at 10% 20%, rgba(180, 70, 255, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(255, 70, 180, 0.08) 0%, transparent 40%);
+      font-family: 'Inter', sans-serif;
+      color: #f0eaff;
+      line-height: 1.5;
+      padding: 0 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 0.5rem;
+    }
+
+    /* Яркие акценты */
+    .accent {
+      color: #ffb347;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .accent-pink {
+      color: #ff6ec7;
+    }
+
+    .accent-purple {
+      color: #c77dff;
+    }
+
+    h1, h2, h3 {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      display: inline-block;
+      border-left: 6px solid #ff6ec7;
+      padding-left: 1.2rem;
+      background: linear-gradient(135deg, #fff 0%, #e0c7ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Первый экран (hero) */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 85vh;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 12vw, 5.5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffb347, #ff6ec7, #c77dff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 0 30px rgba(255, 110, 199, 0.3);
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      color: #cdc2e0;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #ff6ec7;
+      color: #0b0b0f;
+      font-weight: 800;
+      font-size: 1.4rem;
+      padding: 1rem 3rem;
+      border-radius: 60px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 25px rgba(255, 110, 199, 0.5);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      border: 2px solid transparent;
+    }
+
+    .btn:hover, .btn:focus {
+      background: #ffb347;
+      box-shadow: 0 15px 30px rgba(255, 179, 71, 0.6);
+      transform: scale(1.03);
+      outline: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Секции */
+    section {
+      margin: 5rem 0;
+    }
+
+    /* Услуги — карточки */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .service-card {
+      background: #18181f;
+      border-radius: 32px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: transform 0.2s;
+      border: 1px solid #2d2d3a;
+      text-align: center;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: #ff6ec7;
+    }
+
+    .service-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      color: #ffb347;
+    }
+
+    .service-price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, #ff6ec7, #c77dff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      color: #a49bb5;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    /* Мастера — карточки с заглушками */
+    .masters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .master-card {
+      background: #18181f;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid #2d2d3a;
+      transition: all 0.2s;
+      text-align: center;
+      padding-bottom: 1.5rem;
+    }
+
+    .master-card:hover {
+      border-color: #c77dff;
+      box-shadow: 0 15px 30px rgba(199, 125, 255, 0.2);
+    }
+
+    .master-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(145deg, #24242e, #0f0f14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      color: #ffb347;
+      border-bottom: 3px solid #ff6ec7;
+      text-shadow: 0 0 20px rgba(255, 179, 71, 0.5);
+      font-weight: 300;
+      position: relative;
+    }
+
+    /* Заглушка-фото: стилизованные инициалы или иконка */
+    .master-img i {
+      font-size: 4rem;
+      color: #c77dff;
+      opacity: 0.9;
+    }
+
+    .master-card h3 {
+      font-size: 1.7rem;
+      margin: 1rem 0 0.3rem;
+      color: #fff;
+    }
+
+    .master-card p {
+      color: #ffb347;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      font-size: 1.1rem;
+    }
+
+    /* Форма записи */
+    .booking {
+      background: #13131c;
+      border-radius: 48px;
+      padding: 3rem 2rem;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.8), 0 0 0 2px rgba(255, 110, 199, 0.2);
+      margin: 3rem 0;
+      border: 1px solid #2a2a36;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    label {
+      font-weight: 600;
+      color: #cbbdf0;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    label i {
+      color: #ff6ec7;
+      width: 1.2rem;
+    }
+
+    input, select, .flatpickr-input {
+      background: #1f1f2b;
+      border: 2px solid #2e2e3d;
+      border-radius: 20px;
+      padding: 0.9rem 1.3rem;
+      font-size: 1rem;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      transition: 0.15s;
+      width: 100%;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #ff6ec7;
+      background: #252533;
+      box-shadow: 0 0 0 4px rgba(255, 110, 199, 0.2);
+    }
+
+    input::placeholder {
+      color: #6f6a7c;
+    }
+
+    /* Календарь (flatpickr) — кастомизация под тёмную тему */
+    .flatpickr-calendar {
+      background: #1b1b26 !important;
+      border: 1px solid #3a3a4a !important;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8) !important;
+      border-radius: 24px !important;
+      color: #fff !important;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    .flatpickr-months .flatpickr-month {
+      background: #1b1b26 !important;
+      color: #ffb347 !important;
+      fill: #ffb347 !important;
+    }
+
+    .flatpickr-current-month .flatpickr-monthDropdown-months {
+      background: #1b1b26 !important;
+      color: #ffb347 !important;
+      font-weight: 700 !important;
+    }
+
+    .flatpickr-weekdays {
+      background: #1b1b26 !important;
+    }
+
+    .flatpickr-weekday {
+      color: #c77dff !important;
+      font-weight: 600 !important;
+    }
+
+    .flatpickr-day {
+      color: #ddd !important;
+      border-radius: 12px !important;
+    }
+
+    .flatpickr-day.selected {
+      background: #ff6ec7 !important;
+      border-color: #ff6ec7 !important;
+      color: #000 !important;
+      font-weight: 800 !important;
+    }
+
+    .flatpickr-day:hover {
+      background: #3a2a4a !important;
+      border-color: #c77dff !important;
+    }
+
+    .flatpickr-day.today {
+      border-color: #ffb347 !important;
+    }
+
+    .flatpickr-day.flatpickr-disabled {
+      color: #444 !important;
+    }
+
+    .flatpickr-prev-month, .flatpickr-next-month {
+      fill: #ffb347 !important;
+    }
+
+    /* Кнопка отправки */
+    .submit-btn {
+      background: #ffb347;
+      color: #0b0b0f;
+      font-weight: 800;
+      font-size: 1.4rem;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 10px 20px rgba(255, 179, 71, 0.3);
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .submit-btn:hover {
+      background: #ff6ec7;
+      box-shadow: 0 15px 30px rgba(255, 110, 199, 0.5);
+      transform: scale(1.01);
+    }
+
+    /* Всплывающее сообщение */
+    .toast-message {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1f1f2e;
+      color: #fff;
+      padding: 1.2rem 2rem;
+      border-radius: 60px;
+      border-left: 8px solid #ffb347;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+      font-weight: 600;
+      font-size: 1.1rem;
+      max-width: 90vw;
+      width: max-content;
+      opacity: 0;
+      transition: opacity 0.4s, transform 0.3s;
+      pointer-events: none;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: rgba(30, 30, 46, 0.95);
+      border: 1px solid #ff6ec7;
+      border-left-width: 10px;
+      text-align: center;
+    }
+
+    .toast-message.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Адаптивность */
+    @media (max-width: 700px) {
+      body {
+        padding: 0 0.8rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        padding-left: 0.8rem;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+      }
+
+      .btn {
+        font-size: 1.2rem;
+        padding: 0.9rem 2rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+
+      .booking {
+        padding: 2rem 1.2rem;
+        border-radius: 32px;
+      }
+
+      .services-grid, .masters-grid {
+        gap: 1rem;
+      }
+
+      .service-card h3 {
+        font-size: 1.6rem;
+      }
+
+      .service-price {
+        font-size: 2rem;
+      }
+
+      .master-card h3 {
+        font-size: 1.5rem;
+      }
+
+      .submit-btn {
+        font-size: 1.2rem;
+      }
+
+      .toast-message {
+        font-size: 0.95rem;
+        padding: 1rem 1.5rem;
+        white-space: normal;
+        border-radius: 30px;
+        width: 90%;
+      }
+    }
+
+    /* Дополнительно: стиль для select */
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23ff6ec7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 1.2rem center;
+      background-size: 1.2rem;
+    }
+
+    /* Иконки в мастерах — заглушки */
+    .master-img i {
+      font-size: 5rem;
+      color: #c77dff;
+      filter: drop-shadow(0 0 15px rgba(199, 125, 255, 0.7));
+    }
+  </style>
+  <!-- flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- ПЕРВЫЙ ЭКРАН -->
+    <section class="hero">
+      <h1>Стайл</h1>
+      <p>Студия маникюра в Москве<br>яркий дизайн · безупречный вкус</p>
+      <a href="#booking" class="btn">Записаться</a>
+    </section>
+
+    <!-- УСЛУГИ -->
+    <section id="services">
+      <h2>Услуги и цены</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Наращивание</h3>
+          <div class="service-price">1 500 ₽</div>
+          <p>Гель, акрил, коррекция</p>
+        </div>
+        <div class="service-card">
+          <h3>Дизайн</h3>
+          <div class="service-price">1 000 ₽</div>
+          <p>Роспись, стразы, френч</p>
+        </div>
+        <div class="service-card">
+          <h3>Покрытие</h3>
+          <div class="service-price">500 ₽</div>
+          <p>Гель-лак, укрепление</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- МАСТЕРА -->
+    <section id="masters">
+      <h2>Наши мастера</h2>
+      <div class="masters-grid">
+        <div class="master-card">
+          <div class="master-img">
+            <i class="fas fa-user-astronaut"></i>
+          </div>
+          <h3>Алина</h3>
+          <p>топ-мастер · 7 лет</p>
+        </div>
+        <div class="master-card">
+          <div class="master-img">
+            <i class="fas fa-user-nurse"></i>
+          </div>
+          <h3>Екатерина</h3>
+          <p>дизайнер · 5 лет</p>
+        </div>
+        <div class="master-card">
+          <div class="master-img">
+            <i class="fas fa-user-graduate"></i>
+          </div>
+          <h3>Мария</h3>
+          <p>мастер универсал · 4 года</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ФОРМА ЗАПИСИ -->
+    <section id="booking">
+      <h2>Запись онлайн</h2>
+      <div class="booking">
+        <form id="bookingForm">
+          <div class="form-grid">
+            <!-- Имя -->
+            <div class="form-group">
+              <label for="name"><i class="fas fa-user"></i> Ваше имя</label>
+              <input type="text" id="name" placeholder="Анна" required>
+            </div>
+
+            <!-- Телефон -->
+            <div class="form-group">
+              <label for="phone"><i class="fas fa-phone-alt"></i> Телефон</label>
+              <input type="tel" id="phone" placeholder="+7 999 123-45-67" required>
+            </div>
+
+            <!-- Дата (календарь) -->
+            <div class="form-group">
+              <label for="date"><i class="fas fa-calendar-alt"></i> Дата</label>
+              <input type="text" id="date" placeholder="Выберите дату" required readonly>
+            </div>
+
+            <!-- Время -->
+            <div class="form-group">
+              <label for="time"><i class="fas fa-clock"></i> Время</label>
+              <input type="time" id="time" required>
+            </div>
+
+            <!-- Услуга -->
+            <div class="form-group full-width">
+              <label for="service"><i class="fas fa-hand-sparkles"></i> Услуга</label>
+              <select id="service" required>
+                <option value="" disabled selected>— выберите услугу —</option>
+                <option value="Наращивание (1500 ₽)">Наращивание — 1500 ₽</option>
+                <option value="Дизайн (1000 ₽)">Дизайн — 1000 ₽</option>
+                <option value="Покрытие (500 ₽)">Покрытие — 500 ₽</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i> Отправить заявку
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Подвал с контактами (необязательно, но для завершённости) -->
+    <footer style="text-align: center; margin: 3rem 0 2rem; color: #5e5a6b; font-size: 0.9rem;">
+      <p>© Студия маникюра «Стайл», Москва · ул. Яркая, 12</p>
+    </footer>
+  </div>
+
+  <!-- Всплывающее сообщение -->
+  <div id="toast" class="toast-message">
+    ✨ Мы проверим есть ли свободное место на желаемую дату и время и перезвоним вам.
+  </div>
+
+  <!-- flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+  <script>
+    (function() {
+      // Инициализация календаря на русском, тёмная тема, минимальная дата - сегодня
+      const today = new Date();
+      const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+      flatpickr("#date", {
+        locale: "ru",
+        dateFormat: "d.m.Y",
+        minDate: minDate,
+        disableMobile: false, // на мобильных тоже красиво
+        theme: "dark",
+        monthSelectorType: "static", // чтобы не было выпадающего списка
+        // Можно добавить дополнительные настройки
+      });
+
+      // Обработка отправки формы
+      const form = document.getElementById('bookingForm');
+      const toast = document.getElementById('toast');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Простая валидация
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const dateVal = document.getElementById('date').value.trim();
+        const timeVal = document.getElementById('time').value.trim();
+        const serviceVal = document.getElementById('service').value;
+
+        if (!name || !phone || !dateVal || !timeVal || !serviceVal) {
+          alert('Пожалуйста, заполните все поля формы.');
+          return;
+        }
+
+        // Показываем всплывающее сообщение
+        toast.classList.add('show');
+
+        // Опционально: очистить форму через 2 секунды (после показа сообщения)
+        setTimeout(() => {
+          form.reset();
+          // Сбрасываем календарь (flatpickr)
+          if (document.getElementById('date')._flatpickr) {
+            document.getElementById('date')._flatpickr.clear();
+          }
+        }, 500);
+
+        // Скрываем сообщение через 6 секунд
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 6000);
+      });
+
+      // Дополнительно: маска для телефона (простая, для удобства)
+      // Можно и без неё, но для красоты
+      const phoneInput = document.getElementById('phone');
+      phoneInput.addEventListener('input', function(e) {
+        let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+        if (!x) return;
+        e.target.value = !x[2] ? x[1] : '+' + x[1] + ' (' + x[2] + ') ' + (x[3] ? x[3] + (x[4] ? '-' + x[4] + (x[5] ? '-' + x[5] : '') : '') : '');
+      });
+
+      // Небольшая доработка: если пользователь нажал на кнопку "Записаться" в hero,
+      // то плавный скролл к форме (уже работает через якорь), но добавим плавность
+      document.querySelector('.hero .btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+      });
+    })();
+  </script>
+</body>
+</html>
